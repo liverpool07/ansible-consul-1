@@ -8,7 +8,7 @@
     consul_version: 1.10.1
     consul_is_ui: true
     consul_is_server: true
-    consul_bootstrap: true
+    consul_install_consul_replicate: true
     consul_use_systemd: true
     consul_use_upstart: false
     consul_use_initd: false

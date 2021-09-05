@@ -45,17 +45,6 @@ consul_download_password: ""
 consul_download_folder: /tmp
 
 consul_is_ui: false
-consul_ui_archive: "consul_{{ consul_version }}_web_ui.zip"
-consul_ui_download: "https://releases.hashicorp.com/consul/{{ consul_version }}/{{ consul_ui_archive }}"
-consul_ui_dir: "{{ consul_home }}/dist"
-consul_ui_server_name: "{{ ansible_fqdn }}"
-consul_ui_require_auth: false
-consul_ui_nginx_template: "consul-nginx.conf.j2"
-consul_ui_auth_user_file: /etc/htpasswd/consul
-consul_ui_server_port: 80
-consul_install_nginx: false
-consul_install_nginx_config: false
-consul_enable_nginx_config: false
 consul_service_state: restarted
 
 consul_install_consul_cli: false
@@ -78,6 +67,7 @@ consul_recursors: []
 
 consul_upstart_template: "consul.conf.j2"
 consul_systemd_template: "consul.systemd.j2"
+consul_replicate_systemd_template: "consul_replicate.systemd.j2"
 consul_initd_template: "consul.initd.sh.j2"
 consul_dnsmasq_upstream_template: "resolv_dnsmasq.conf.j2"
 consul_kv_template: "consulkv.j2"

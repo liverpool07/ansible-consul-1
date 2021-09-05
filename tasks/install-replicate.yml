@@ -1,0 +1,35 @@
+- name: check replicate archive stat
+  stat: path={{ consul_download_folder }}/{{ consul_replicate_archive }}
+  register: consul_archive_replicate_stat
+
+- name: create consul_replicate_dir if it does not exist
+  file:
+    path: "{{ consul_replicate_dir }}"
+    state: directory
+    mode: 0755
+
+- name: download consul replicate
+  get_url: >
+    url={{consul_replicate_download}}
+    dest={{consul_download_folder}}
+  register: consul_replicate_was_downloaded
+  when: consul_archive_replicate_stat.stat.exists == False
+
+- name: create replicate dir
+  file: path={{ consul_replicate_dir }} state=directory
+
+- name: copy and unpack replicate
+  unarchive: >
+    src={{ consul_download_folder }}/{{ consul_replicate_archive }}
+    dest={{ consul_replicate_dir }}
+    copy=no
+  when: consul_replicate_was_downloaded is changed
+
+- name: set ownership
+  file: >
+    state=directory
+    path={{consul_replicate_dir}}
+    owner={{consul_user}}
+    group={{consul_group}}
+    recurse=yes
+  when: consul_replicate_was_downloaded is changed
