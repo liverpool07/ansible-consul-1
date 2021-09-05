@@ -1,0 +1,35 @@
+# -----------------
+# DC1
+# -----------------
+[dc1]
+172.30.0.137 consul_node_name=consulSrv01
+172.30.0.138 consul_node_name=consulSrv02
+172.30.0.139 consul_node_name=consulSrv03
+#172.30.0.140 consul_node_name=consulC01
+#172.30.0.141 consul_node_name=consulC02
+
+[dc2]
+172.30.0.142  consul_node_name=consulSrv01
+172.30.0.143  consul_node_name=consulSrv02 
+172.30.0.144  consul_node_name=consulSrv03
+
+[dc2-client]
+
+
+# -----------------
+# 分组定义变量
+# -----------------
+[all:vars]
+ansible_ssh_user=root
+
+
+[dc1:vars]
+consul_datacenter=dc1
+consul_servers=["172.30.0.137","172.30.0.138","172.30.0.139"]
+
+[dc2:vars]
+consul_datacenter=dc2
+consul_retry_join_wan=true
+consul_servers=["172.30.0.142","172.30.0.143","172.30.0.144"]
+consul_servers_wan=["172.30.0.137","172.30.0.138","172.30.0.139"]
+

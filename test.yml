@@ -4,13 +4,22 @@
   roles:
     - ansible-consul
   vars:
+    consul_arch: "amd64" 
+    consul_version: 1.10.1
     consul_is_ui: true
     consul_is_server: true
-    consul_datacenter: "test"
     consul_bootstrap: true
-    consul_node_name: "vagrant"
-    consul_advertise_address: "10.0.2.15"
-    nginx_remove_default: yes
+    consul_use_systemd: true
+    consul_use_upstart: false
+    consul_use_initd: false
+    consul_retry_join: true
+    consul_install_nginx: false
+    consul_install_nginx_config: false
+    consul_enable_nginx_config: false
+    consul_bind_address: "0.0.0.0"
+    consul_dynamic_bind: false
+    consul_client_address: "0.0.0.0"
+    consul_client_address_bind: true
     htpasswd:
       - name: admin
         users:

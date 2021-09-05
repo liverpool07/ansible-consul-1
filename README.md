@@ -36,8 +36,9 @@ Here is a list of all the default variables for this role, which are also availa
 
 ```yml
 ---
-consul_version: 0.6.0
-consul_archive: "consul_{{ consul_version }}_linux_amd64.zip"
+consul_arch: "amd64"
+consul_version: 1.10.1
+consul_archive: "consul_{{ consul_version }}_linux_{{consul_arch}}.zip"
 consul_download: "https://releases.hashicorp.com/consul/{{ consul_version }}/{{ consul_archive }}"
 consul_download_username: ""
 consul_download_password: ""
@@ -52,9 +53,9 @@ consul_ui_require_auth: false
 consul_ui_nginx_template: "consul-nginx.conf.j2"
 consul_ui_auth_user_file: /etc/htpasswd/consul
 consul_ui_server_port: 80
-consul_install_nginx: true
-consul_install_nginx_config: true
-consul_enable_nginx_config: true
+consul_install_nginx: false
+consul_install_nginx_config: false
+consul_enable_nginx_config: false
 consul_service_state: restarted
 
 consul_install_consul_cli: false
@@ -88,8 +89,8 @@ consul_binary: consul
 consul_user: consul
 consul_group: consul
 
-consul_use_systemd: false
-consul_use_upstart: true
+consul_use_systemd: true
+consul_use_upstart: false
 consul_use_initd: false
 
 consul_is_server: false

@@ -11,7 +11,6 @@
     state=installed
   with_items:
     - unzip
-    - jq
   when: ansible_os_family == "Debian"
 
 - name: install deps (RHEL)
@@ -20,7 +19,6 @@
     state=installed
   with_items:
     - unzip
-    - jq
   when: ansible_os_family == "RedHat"
 
 - name: check archive stat
@@ -181,13 +179,14 @@
     group=root
     mode=0755
 
-- name: copy consulkv script
-  template: >
-    src={{consul_kv_template}}
-    dest={{consul_home}}/bin/consulkv
-    owner={{consul_user}}
-    group={{consul_group}}
-    mode=0755
+# 依赖jq，skip
+# - name: copy consulkv script
+#   template: >
+#     src={{consul_kv_template}}
+#     dest={{consul_home}}/bin/consulkv
+#     owner={{consul_user}}
+#     group={{consul_group}}
+#     mode=0755
 
 - name: consul config file
   template: >
