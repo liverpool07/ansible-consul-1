@@ -46,6 +46,9 @@
   "node_name": "{{ consul_node_name }}",
 {% endif %}
   "server": {{ "true" if consul_is_server else "false" }},
+{% if consul_is_ui is defined %}
+  "ui": {{ "true" if consul_is_ui else "false" }},
+{% endif %}
 {% if consul_client_address_bind and consul_client_address is defined and consul_client_address is not none %}
   "client_addr": "{{ consul_client_address }}",
 {% endif %}

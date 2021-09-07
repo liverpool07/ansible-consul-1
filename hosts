@@ -2,14 +2,14 @@
 # DC1
 # -----------------
 [dc1]
-172.30.0.137 consul_node_name=consulSrv01
+172.30.0.137 consul_node_name=consulSrv01 consul_bootstrap=true
 172.30.0.138 consul_node_name=consulSrv02
 172.30.0.139 consul_node_name=consulSrv03
 #172.30.0.140 consul_node_name=consulC01
 #172.30.0.141 consul_node_name=consulC02
 
 [dc2]
-172.30.0.142  consul_node_name=consulSrv01 consul_install_consul_replicate=true
+172.30.0.142  consul_node_name=consulSrv01 consul_install_consul_replicate=true consul_replicate_use_systemd=true consul_bootstrap=true
 172.30.0.143  consul_node_name=consulSrv02 
 172.30.0.144  consul_node_name=consulSrv03
 

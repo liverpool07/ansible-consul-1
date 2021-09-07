@@ -7,6 +7,9 @@
   action: service name=consul state=restarted enabled=yes
   when: consul_manage_service
 
+- name: restart consul replicate
+  action: service name=consul-replicate state=restarted enabled=yes
+
 - name: reload consul config
   become: yes
   command: pkill -1 consul
