@@ -9,7 +9,7 @@ Restart=on-failure
 User={{ consul_user }}
 Group={{ consul_group }}
 PermissionsStartOnly=true
-ExecStart={{ consul_replicate_dir }}/consul-replicate -log-level info -prefix "prometheus@{{ consul_replicate_source_datacenter }}"
+ExecStart={{ consul_replicate_dir }}/consul-replicate -log-level info -prefix "{{ consul_replicate_key }}@{{ consul_replicate_source_datacenter }}"
 ExecReload=/bin/kill -HUP $MAINPID
 KillSignal=SIGINT
 
