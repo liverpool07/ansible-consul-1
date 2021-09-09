@@ -1,19 +1,15 @@
-- name: check replicate archive stat
-  stat: path={{ consul_download_folder }}/{{ consul_replicate_archive }}
-  register: consul_archive_replicate_stat
+---
+
+- name: copy consul-replicate
+  copy:
+    src: consul-replicate_0.4.0_linux_amd64.zip
+    dest: "{{consul_download_folder}}"
 
 - name: create consul_replicate_dir if it does not exist
   file:
     path: "{{ consul_replicate_dir }}"
     state: directory
     mode: 0755
-
-- name: download consul replicate
-  get_url: >
-    url={{consul_replicate_download}}
-    dest={{consul_download_folder}}
-  register: consul_replicate_was_downloaded
-  when: consul_archive_replicate_stat.stat.exists == False
 
 - name: create replicate dir
   file: path={{ consul_replicate_dir }} state=directory
@@ -23,7 +19,11 @@
     src={{ consul_download_folder }}/{{ consul_replicate_archive }}
     dest={{ consul_replicate_dir }}
     copy=no
-  when: consul_replicate_was_downloaded is changed
+
+- name: Clean /tmp/consul-replicate_0.4.0_linux_amd64.zip
+  file:
+    path: /tmp/consul-replicate_0.4.0_linux_amd64.zip
+    state: absent
 
 - name: set ownership
   file: >
@@ -32,7 +32,6 @@
     owner={{consul_user}}
     group={{consul_group}}
     recurse=yes
-  when: consul_replicate_was_downloaded is changed
 
 - name: copy replicate systemd script
   template: >
