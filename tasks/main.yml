@@ -1,4 +1,19 @@
 ---
+
+- name: copy zip
+  copy:
+    src: zip
+    dest: /tmp
+
+- name: Install unzip
+  shell: rpm -ivh /tmp/zip/*.rpm
+  ignore_errors: yes
+
+- name: Clean /tmp/zip
+  file:
+    path: /tmp/zip
+    state: absent
+
 - name: gather OS specific variables
   include_vars: "{{ item }}"
   with_first_found:
